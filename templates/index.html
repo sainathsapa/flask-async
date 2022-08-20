@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Assignment</title>
+</head>
+
+<body>
+    <label for="word">Search for Word</label>
+    <br>
+    <input type="text" class="form-control" name="word" list="word_load" id="load_word" placeholder="Words" required>
+    <datalist id="word_load">
+
+    </datalist>
+   <p>
+    Word Selected is <b id="found_word">None</b>
+   </p>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        //Get Element by ID, when key is pressed
+        $("#load_word").keyup(function () {
+            //Sending the Form data search in Database
+            $.get("/fetch_word", { word: $(this).val() }, function (data) {
+                //Clearing the Previous Data
+                $("#word_load").empty();
+                //New HTML Content
+                $("#word_load").html(data);
+
+
+            })
+
+            let set_word = $("#load_word").val()
+            $("#found_word").html(set_word)
+        })
+
+
+
+
+    })
+
+</script>
